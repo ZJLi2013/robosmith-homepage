@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoboSmith: Interaction-Ready Synthetic Data Infrastructure</title>
+  <meta name="description" content="RoboSmith project page for interaction-ready synthetic manipulation data.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5d687c;
+      --accent: #3157d5;
+      --border: #dfe4ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 32px 20px 28px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 820px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .authors {
+      margin: 10px 0 24px;
+      color: var(--muted);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--accent);
+      font-weight: 650;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(31, 45, 80, 0.08);
+    }
+
+    .button.disabled {
+      color: var(--muted);
+      cursor: default;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: 0 12px 36px rgba(31, 45, 80, 0.08);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 16px;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .tile {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbfcff;
+    }
+
+    .tile strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 16px;
+      border-radius: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <h1>RoboSmith</h1>
+      <p class="subtitle">
+        Toward interaction-ready synthetic data infrastructure for tabletop manipulation.
+      </p>
+      <p class="authors">David Li, Alex He</p>
+      <div class="links">
+        <a class="button disabled" href="#" aria-disabled="true">Paper coming soon</a>
+        <a class="button disabled" href="#" aria-disabled="true">Code release coming soon</a>
+        <a class="button" href="#demo">Demo Video</a>
+        <a class="button" href="#bibtex">BibTeX</a>
+      </div>
+    </header>
+
+    <section id="demo">
+      <h2>Interaction-Ready Rollout Demo</h2>
+      <video controls preload="metadata" playsinline>
+        <source src="assets/c10_c11_one_success_per_asset_success_demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">
+        One successful rollout per asset from the built-in and generated asset validation demos.
+      </p>
+    </section>
+
+    <section>
+      <h2>Overview</h2>
+      <p>
+        Scalable manipulation data is a major bottleneck for embodied intelligence.
+        RoboSmith treats static assets as only the first step: generated or imported
+        objects must become interaction-ready through asset admission, task-scene
+        resolution, learned grasp proposals, deterministic feasibility filtering,
+        policy onboarding, metadata-guided rollout, and dataset/evaluation export.
+      </p>
+      <div class="grid">
+        <div class="tile">
+          <strong>From sim-ready to interaction-ready</strong>
+          Assets carry scale, pose, mesh audit, and policy evidence before they are used for data generation.
+        </div>
+        <div class="tile">
+          <strong>Metadata-guided grasping</strong>
+          Learned 6-DoF proposals are filtered by robot/table feasibility and selected through reusable pose-family evidence.
+        </div>
+        <div class="tile">
+          <strong>Rollout-to-data path</strong>
+          Episodes record success, failure modes, videos, and metadata for training and evaluation workflows.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pipeline</h2>
+      <pre><code>asset generation/import
+  -> asset audit and metadata update
+  -> scene/task resolution
+  -> learned 6-DoF grasp proposals
+  -> deterministic feasibility filtering
+  -> policy bucket onboarding
+  -> metadata-guided rollout
+  -> episode videos, metadata, dataset/eval outputs</code></pre>
+    </section>
+
+    <section id="bibtex">
+      <h2>BibTeX</h2>
+      <pre><code>@misc{robotsmith2026,
+  title  = {RoboSmith: Toward Interaction-Ready Synthetic Data Infrastructure for Tabletop Manipulation},
+  author = {Li, David and He, Alex},
+  year   = {2026},
+  note   = {Project page: https://zjli2013.github.io/robosmith-homepage/}
+}</code></pre>
+    </section>
+
+    <footer>
+      RoboSmith project page. Paper, code, and dataset links will be updated as releases become available.
+    </footer>
+  </main>
+</body>
+</html>
