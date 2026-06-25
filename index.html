@@ -160,8 +160,9 @@
       <p class="authors">David Li, Alex He</p>
       <div class="links">
         <a class="button disabled" href="#" aria-disabled="true">Paper coming soon</a>
-        <a class="button disabled" href="#" aria-disabled="true">Code release coming soon</a>
+        <a class="button" href="https://github.com/ZJLi2013/RoboSmith" target="_blank" rel="noopener">Code (GitHub)</a>
         <a class="button" href="#demo">Demo Video</a>
+        <a class="button" href="#code">Code &amp; Dependencies</a>
         <a class="button" href="#bibtex">BibTeX</a>
       </div>
     </header>
@@ -174,6 +175,26 @@
       </video>
       <p class="caption">
         One successful rollout per asset from the built-in and generated asset validation demos.
+      </p>
+    </section>
+
+    <section id="articraft">
+      <h2>Long-Horizon Articulated Manipulation</h2>
+      <video controls preload="metadata" playsinline>
+        <source src="assets/pick_place_into_drawer_ep000_up.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">
+        Articulated asset (drawer): a single Code-as-Policy declaration drives the
+        full open &rarr; pick &rarr; place-into-drawer &rarr; close sequence.
+      </p>
+      <p>
+        Beyond rigid objects, RoboSmith generates interaction-ready data for
+        <strong>articulated</strong> assets. The hero task chains learned 6-DoF
+        grasping, collision-free motion, and stateful articulation (drawer joint)
+        into a long-horizon episode &mdash; the same asset-admission &rarr;
+        feasibility &rarr; rollout pipeline, now producing multi-step interaction
+        trajectories rather than single grasps.
       </p>
     </section>
 
@@ -214,6 +235,41 @@
   -> episode videos, metadata, dataset/eval outputs</code></pre>
     </section>
 
+    <section id="code">
+      <h2>Code &amp; Dependencies</h2>
+      <p>
+        RoboSmith is built on a stack of open ROCm-first components. The core
+        engine is open source; the learned grasp planner (GraspGen) is
+        NVIDIA research/eval-licensed and fetched from upstream.
+      </p>
+      <div class="grid">
+        <div class="tile">
+          <strong><a href="https://github.com/ZJLi2013/RoboSmith" target="_blank" rel="noopener">RoboSmith</a></strong>
+          Core engine: asset admission, scene/task resolution, feasibility filtering, metadata-guided rollout and dataset/eval export.
+        </div>
+        <div class="tile">
+          <strong><a href="https://github.com/ZJLi2013/RocRecon" target="_blank" rel="noopener">rocRecon</a></strong>
+          Asset reconstruction &amp; audit &mdash; turning generated/imported meshes into sim-ready, metadata-carrying assets.
+        </div>
+        <div class="tile">
+          <strong><a href="https://github.com/ZJLi2013/rocRobo" target="_blank" rel="noopener">rocRobo</a></strong>
+          Collision-free motion planning sidecar (JAX/pyroki on ROCm) used for the rollout motion path.
+        </div>
+        <div class="tile">
+          <strong><a href="https://github.com/NVlabs/GraspGen" target="_blank" rel="noopener">GraspGen</a></strong>
+          Learned 6-DoF grasp proposals (NVIDIA research/eval license). Run on ROCm via the spconv_rocm PTV3 backbone.
+        </div>
+        <div class="tile">
+          <strong><a href="https://github.com/PhysicalAI-AIM/interaction_sdg_workshop" target="_blank" rel="noopener">Interaction-SDG Workshop</a></strong>
+          Self-contained, reproducible workshop (notebook + images) for interaction-ready data generation on AMD MI300.
+        </div>
+        <div class="tile">
+          <strong><a href="https://github.com/ZJLi2013/spconv_rocm" target="_blank" rel="noopener">spconv_rocm</a></strong>
+          ROCm port of sparse-convolution ops, enabling the GraspGen PTV3 backbone on AMD GPUs.
+        </div>
+      </div>
+    </section>
+
     <section id="bibtex">
       <h2>BibTeX</h2>
       <pre><code>@misc{robotsmith2026,
@@ -225,7 +281,9 @@
     </section>
 
     <footer>
-      RoboSmith project page. Paper, code, and dataset links will be updated as releases become available.
+      RoboSmith project page. Code is available on
+      <a href="https://github.com/ZJLi2013/RoboSmith" target="_blank" rel="noopener">GitHub</a>;
+      paper and dataset links will be updated as releases become available.
     </footer>
   </main>
 </body>
