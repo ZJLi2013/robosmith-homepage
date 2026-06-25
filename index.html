@@ -203,9 +203,13 @@
       <p>
         Scalable manipulation data is a major bottleneck for embodied intelligence.
         RoboSmith treats static assets as only the first step: generated or imported
-        objects must become interaction-ready through asset admission, task-scene
-        resolution, learned grasp proposals, deterministic feasibility filtering,
-        policy onboarding, metadata-guided rollout, and dataset/evaluation export.
+        objects &mdash; rigid <em>and</em> articulated &mdash; must become
+        interaction-ready through asset admission, task-scene resolution, learned
+        grasp proposals, deterministic feasibility filtering, policy onboarding,
+        metadata-guided rollout, and dataset/evaluation export. A concise
+        <strong>Code-as-Policy (CAP)</strong> declaration decouples task intent
+        from execution, so a single ~15-line spec can drive long-horizon,
+        multi-step interaction episodes.
       </p>
       <div class="grid">
         <div class="tile">
@@ -213,8 +217,16 @@
           Assets carry scale, pose, mesh audit, and policy evidence before they are used for data generation.
         </div>
         <div class="tile">
+          <strong>Code-as-Policy (CAP)</strong>
+          A ~15-line declarative spec states <em>what</em> to do; RoboSmith resolves grasping, motion, and articulation into the <em>how</em>.
+        </div>
+        <div class="tile">
           <strong>Metadata-guided grasping</strong>
           Learned 6-DoF proposals are filtered by robot/table feasibility and selected through reusable pose-family evidence.
+        </div>
+        <div class="tile">
+          <strong>Long-horizon articulated tasks</strong>
+          Stateful articulation (e.g. a drawer joint) is chained with grasp + motion into multi-step open&rarr;pick&rarr;place&rarr;close episodes.
         </div>
         <div class="tile">
           <strong>Rollout-to-data path</strong>
@@ -225,7 +237,8 @@
 
     <section>
       <h2>Pipeline</h2>
-      <pre><code>asset generation/import
+      <pre><code>Code-as-Policy (CAP) task spec   (~15 lines: what, not how)
+asset generation/import
   -> asset audit and metadata update
   -> scene/task resolution
   -> learned 6-DoF grasp proposals
